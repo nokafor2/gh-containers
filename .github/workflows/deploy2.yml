@@ -1,4 +1,4 @@
-name: Deployment (Container)
+name: Deployment without (Container)
 on:
   push:
     branches:
@@ -14,14 +14,15 @@ jobs:
     # To put a job and its steps into a container, use the "container" keyword
     # You can specify the name of the image to use
     # "node:16" uses the node image of version 16
-    container: 
-      image: node:16
+    # container: 
+    #   image: node:16
       # This is the environment variable needed by the image
       # env: 
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb #mongodb+srv
       # you can use the label of the connection cantainer as the address
-      MONGODB_CLUSTER_ADDRESS: mongodb #cluster0.zq0lm1o.mongodb.net
+      # When no container is used, the local port would be used with the services
+      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017 #cluster0.zq0lm1o.mongodb.net
       MONGODB_USERNAME: root # nokafor
       MONGODB_PASSWORD: example # 6QpL4X96
       PORT: 8080
@@ -32,6 +33,9 @@ jobs:
       mongodb:
         # specify the image key
         image: mongo
+        # specify ports when using the local server
+        ports:
+          - 27017:27017
         # set the env properties for the mongodb image environment variables
         env:
           MONGO_INITDB_ROOT_USERNAME: root
