@@ -17,7 +17,7 @@ jobs:
     container: 
       image: node:16
       # This is the environment variable needed by the image
-      env: 
+      # env: 
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb+srv
       MONGODB_CLUSTER_ADDRESS: cluster0.zq0lm1o.mongodb.net
